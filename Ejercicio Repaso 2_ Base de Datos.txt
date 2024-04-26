@@ -1,0 +1,111 @@
+﻿Dada la siguiente base de datos correspondiente a los nombres y notas de un curso de tecnología de Secundaria se nos pide que como mínimo la página debe ser capaz de mostrarnos los valores correspondientes nada más iniciarse y poder seleccionar el orden en el que se muestran, alfabéticamente y por nota de mayor a menor. También se requiere incorporar funciones que permitan el filtrado de la base de datos correspondiente a aprobados, su nota es mayor o igual a 5, y suspensos, los casos restantes. 
+
+
+Para obtener mayor nota el filtrado debe ser constante, es decir, si después de seleccionar un filtrado se selecciona un ordenamiento se debe aplicar a ese filtrado, no al total de resultados de la base de datos inicial. 
+Para aprobar basta solamente con que realice el filtrado y al seleccionar ordenar lo realiza al total de la base de datos.
+
+
+NOTA: En ningún momento se nos pide editar la base de datos, es decir, el número de entradas siempre será el mismo, lo que quiere decir que si después de realizar un filtrado se desactiva debe retornar a los valores iniciales de la base de datos.
+
+
+
+
+Base de datos:
+
+
+Pepe,8
+Juan,5
+Manuel Jesús,10
+Alberto,4
+Igor,2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const baseDeDatos = [["Juanito", 7], ["Pepe", 8], ["Juan", 5], ["Manuel", 10], ["Alberto", 4], ["Igor", 2]];
+const ruta = document.getElementById("base");
+escritura(baseDeDatos)
+let baseFiltrada = baseDeDatos.concat()
+function escritura(nombre) {
+        ruta.innerHTML = "";
+        nombre.forEach((valor) => ruta.innerHTML += (valor + "<br>"))
+}
+/*ordenar*/
+function alfabetico() {
+        /*esto se hace para tener una copia de baseDeDatos sin que sean el mismo*/
+        baseFiltrada = (baseFiltrada.concat())
+        baseFiltrada.sort((a, b) => {
+                /*se puede comparar string de esta manera*/
+                if (a[0] > b[0]) {
+                        return 1
+                }
+                else
+                        return -1
+        })
+        escritura(baseFiltrada)
+}
+function notas() {
+        baseFiltrada = (baseFiltrada.concat())
+        baseFiltrada.sort((a, b) => {
+                if (a[1] < b[1]) {
+                        return 1
+                }
+                else
+                        return -1
+        })
+        escritura(baseFiltrada)
+}
+function todos (){
+        baseFiltrada = baseDeDatos.concat();
+        escritura(baseFiltrada)
+}
+/*si no se usa sort siempre se puede hacer una unión de varios modos conocidos previamente*/
+function nota() {
+        baseFiltrada = (baseDeDatos.concat()).fill([0, 0])
+        let base = (baseDeDatos.concat()).fill(-1)
+        for (i = 0; i < baseDeDatos.length; i++) {
+                baseDeDatos.forEach((aux, index) => {
+                        if (!base.some((numero) => numero == index))
+                                if (baseFiltrada[i][1] < aux[1]) {
+                                        baseFiltrada[i] = aux
+                                        base[i] = index
+                                }
+                })
+        }
+        escritura(baseFiltrada)
+}
+/*filtrar*/
+function filNota(valor) {
+        baseFiltrada = baseDeDatos.filter((numero) => {
+                if (valor == 0) {
+                        if (numero[1] < 5) {
+                                return numero
+                        }
+                }
+                else {
+                        if (numero[1] >= 5) {
+                                return numero
+                        }
+                }
+        })
+        escritura(baseFiltrada)
+}
+/*otra manera */
+function suspensos() {
+        baseFiltrada = baseDeDatos.filter((numero) => {
+                if (numero[1] < 5) {
+                        return numero
+                }
+        })
+        escritura(baseFiltrada)
+}
