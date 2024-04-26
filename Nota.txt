@@ -1,0 +1,171 @@
+﻿Ejercicio 1: Calcular la suma de los elementos de un array
+Dado un array de números, escribe una función que calcule la suma de todos los elementos del array.
+
+
+Ejercicio 2: Encontrar el número mayor y menor en un array
+Dado un array de números, escribe una función que encuentre el número mayor y el número menor en el array.
+
+
+Ejercicio 3: Calcular la diferencia de días entre dos fechas
+Escribe una función que tome dos fechas como entrada y devuelva la diferencia en días entre ellas.
+
+
+Ejercicio 4: Filtrar fechas por rango
+Dado un array de fechas, escribe una función que filtre las fechas dentro de un rango específico de fechas.
+
+
+Ejercicio 5: Ordenar un array de fechas
+Escribe una función que tome un array de fechas como entrada y devuelva el array ordenado de manera ascendente o descendente según se desee.
+
+
+Ejercicio 6: Encontrar la fecha más reciente y más antigua en un array de fechas
+Dado un array de fechas, escribe una función que encuentre la fecha más reciente y la fecha más antigua en el array.
+
+
+Ejercicio 7: Calcular la edad promedio de un grupo de personas a partir de sus fechas de nacimiento
+Dado un array de fechas de nacimiento, escribe una función que calcule la edad promedio de las personas en ese array.
+
+
+Ejercicio 8: Encontrar la cantidad de días hábiles entre dos fechas
+Escribe una función que tome dos fechas como entrada y devuelva la cantidad de días hábiles (sin contar fines de semana) entre esas dos fechas.
+
+
+
+
+1
+function sumarElementos(array) {
+    return array.reduce((total, num) => total + num, 0);
+}
+
+
+// Ejemplo de uso:
+var numeros = [1, 2, 3, 4, 5];
+console.log("La suma de los elementos es:", sumarElementos(numeros));
+
+
+2
+function encontrarMayorMenor(array) {
+    return {
+        mayor: Math.max(...array),
+        menor: Math.min(...array)
+    };
+}
+
+
+// Ejemplo de uso:
+var numeros = [10, 5, 7, 2, 15];
+var resultados = encontrarMayorMenor(numeros);
+console.log("El número mayor es:", resultados.mayor);
+console.log("El número menor es:", resultados.menor);
+
+
+3
+function diferenciaDias(fecha1, fecha2) {
+    const unDia = 1000 * 60 * 60 * 24;
+    const diferencia = Math.abs(fecha1 - fecha2);
+    return Math.floor(diferencia / unDia);
+}
+
+
+// Ejemplo de uso:
+var fechaInicio = new Date('2024-04-01');
+var fechaFin = new Date('2024-04-15');
+console.log("La diferencia de días es:", diferenciaDias(fechaInicio, fechaFin));
+
+
+4
+function filtrarFechasPorRango(fechas, fechaInicio, fechaFin) {
+    return fechas.filter(fecha => fecha >= fechaInicio && fecha <= fechaFin);
+}
+
+
+// Ejemplo de uso:
+var fechas = [
+    new Date('2024-04-01'),
+    new Date('2024-04-10'),
+    new Date('2024-04-15'),
+    new Date('2024-04-20')
+];
+var fechaInicio = new Date('2024-04-05');
+var fechaFin = new Date('2024-04-18');
+console.log("Fechas dentro del rango:", filtrarFechasPorRango(fechas, fechaInicio, fechaFin));
+
+
+5
+function filtrarFechasPorRango(fechas, fechaInicio, fechaFin) {
+    return fechas.filter(fecha => fecha >= fechaInicio && fecha <= fechaFin);
+}
+
+
+// Ejemplo de uso:
+var fechas = [
+    new Date('2024-04-01'),
+    new Date('2024-04-10'),
+    new Date('2024-04-15'),
+    new Date('2024-04-20')
+];
+var fechaInicio = new Date('2024-04-05');
+var fechaFin = new Date('2024-04-18');
+console.log("Fechas dentro del rango:", filtrarFechasPorRango(fechas, fechaInicio, fechaFin));
+
+
+6
+function encontrarExtremosFechas(fechas) {
+    return {
+        masAntigua: new Date(Math.min(...fechas)),
+        masReciente: new Date(Math.max(...fechas))
+    };
+}
+
+
+// Ejemplo de uso:
+var fechas = [
+    new Date('2024-04-15'),
+    new Date('2024-04-10'),
+    new Date('2024-04-20'),
+    new Date('2024-04-05')
+];
+var extremos = encontrarExtremosFechas(fechas);
+console.log("Fecha más antigua:", extremos.masAntigua);
+console.log("Fecha más reciente:", extremos.masReciente);
+
+
+7
+function calcularEdadPromedio(fechasNacimiento) {
+    var sumaEdades = fechasNacimiento.reduce((total, fecha) => {
+        var edad = new Date().getFullYear() - fecha.getFullYear();
+        return total + edad;
+    }, 0);
+    return sumaEdades / fechasNacimiento.length;
+}
+
+
+// Ejemplo de uso:
+var fechasNacimiento = [
+    new Date('1990-05-10'),
+    new Date('1985-10-15'),
+    new Date('1980-02-20')
+];
+console.log("Edad promedio:", calcularEdadPromedio(fechasNacimiento));
+
+
+8
+function diasHabilesEntreFechas(fechaInicio, fechaFin) {
+    const unDia = 1000 * 60 * 60 * 24;
+    var cantidadDias = 0;
+    var fechaActual = new Date(fechaInicio);
+    while (fechaActual <= fechaFin) {
+        var diaSemana = fechaActual.getDay();
+        if (diaSemana !== 0 && diaSemana !== 6) {
+            cantidadDias++;
+        }
+        fechaActual.setTime(fechaActual.getTime() + unDia);
+    }
+    return cantidadDias;
+}
+
+
+// Ejemplo de uso:
+var fechaInicio = new Date('2024-04-01');
+var fechaFin = new Date('2024-04-15');
+console.log("Días hábiles entre las fechas:", diasHabilesEntreFechas(fechaInicio, fechaFin));
