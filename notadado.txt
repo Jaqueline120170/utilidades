@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Dados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #resultado {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Juego de Dados</h1>
+  <button onclick="lanzarDados()">Lanzar Dados</button>
+  <div id="resultado"></div>
+
+  <script src="juego.js"></script>
+</body>
+</html>
+function lanzarDados() {
+  var dado1 = Math.floor(Math.random() * 6) + 1;
+  var dado2 = Math.floor(Math.random() * 6) + 1;
+  var total = dado1 + dado2;
+
+  var resultado = document.getElementById("resultado");
+  resultado.innerHTML = "Dado 1: " + dado1 + " - Dado 2: " + dado2 + "<br/>Total: " + total;
+
+  if (dado1 === dado2) {
+    resultado.innerHTML += "<br/>¡Dobles! Has ganado!";
+  } else {
+    resultado.innerHTML += "<br/>No has obtenido dobles, inténtalo de nuevo.";
+  }
+}
